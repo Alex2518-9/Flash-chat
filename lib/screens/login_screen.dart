@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
+  // use static instead of final for the id variable to make it accessible without creating an instance of the class
+  static String id = 'login_screen';
+
   const LoginScreen({super.key});
 
   @override
