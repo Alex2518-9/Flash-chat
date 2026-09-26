@@ -32,10 +32,14 @@ class _ChatScreenState extends State<ChatScreen> {
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser!.email);
+        if (kDebugMode) {
+          debugPrint(loggedInUser!.email);
+        }
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
     }
   }
 

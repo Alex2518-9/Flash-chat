@@ -24,16 +24,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void loginUser(String email, String password) async {
     try {
-      final user = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if (user != null) {
-        // Navigate to chat screen
-        Navigator.pushNamed(context, ChatScreen.id);
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+      if (!mounted) {
+        return; // Check if the widget is still mounted before navigating
       }
+
+      // Navigate to chat screen
+      Navigator.pushNamed(context, ChatScreen.id);
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        debugPrint(e.toString());
+      }
     }
   }
 
@@ -49,11 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Hero(
-                tag: 'logo',
-                child: Container(
-                  height: 200.0,
-                  child: Image.asset('images/logo.png'),
+              Flexible(
+                child: Hero(
+                  tag: 'logo',
+                  child: SizedBox(
+                    height: 200.0,
+                    child: Image.asset('images/logo.png'),
+                  ),
                 ),
               ),
               SizedBox(height: 48.0),

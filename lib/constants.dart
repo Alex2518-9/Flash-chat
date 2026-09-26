@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const bool kReleaseMode = bool.fromEnvironment('dart.vm.product');
+const bool kProfileMode = bool.fromEnvironment('dart.vm.profile');
+const bool kDebugMode = !kReleaseMode && !kProfileMode;
+
 const kSendButtonTextStyle = TextStyle(
   color: Colors.lightBlueAccent,
   fontWeight: FontWeight.bold,
